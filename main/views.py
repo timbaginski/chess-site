@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from .controllers import userController
+from django.contrib.auth import authenticate, login
+
 
 # return signup page
 def signup(request):
@@ -19,4 +21,21 @@ def signup(request):
     
     return render(request, 'signup.html')
 
+
+# def return login page
+def signIn(request):
+    if request.method == "GET":
+        return render(request, 'login.html')
+
+    username = request.POST.get('username', None)
+    password = request.POST.get('password', None)
+
+    user = userController.loginUser(username, password)
+    if user != None:
+        login(request, user)
+        return render(request, 'login.html')
+
+    return render(request, 'signup.html')
+    
+    
 
