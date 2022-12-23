@@ -6,3 +6,7 @@ body {
     background: #404040;
     color: #FFFFFF;
 }
+
+.btn-dark {
+    background: #333333;
+}
