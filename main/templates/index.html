@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block headers %}
+<title>Bishop Pair</title>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row text-center">
+        <div class="col lg-8">
+            <h1>About BishopPair</h1>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col lg-8">
+            <p>
+                BishopPair is a website that allows a user to play a 2v2 chess match live against other players.
+                On each turn, both players on each team have 15 seconds to select a move. After this 15 seconds, 
+                the engine will evaluate both moves and play the one it evaluates as the best on their behalf. As 
+                of now, there is no rating system, although if the app gets popular enough I may consider implementing
+                one in the future. 
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

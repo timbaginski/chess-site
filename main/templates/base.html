@@ -23,6 +23,11 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/login">Log In</a>
                     </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/logout">Log Out</a>
+                    </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>

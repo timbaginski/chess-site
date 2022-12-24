@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from .controllers import userController
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 
 # return signup page
@@ -33,8 +33,15 @@ def signin(request):
     user = userController.loginUser(username, password)
     if user != None:
         login(request, user)
-        return render(request, 'login.html', context={"error": 0})
+        return index(request)
 
     return render(request, 'login.html', context={"error": 1})
+
+def logoutUser(request):
+    logout(request)
+    return signin(request)
+
+def index(request):
+    return render(request, 'index.html')
     
 
