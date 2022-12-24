@@ -1,7 +1,9 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block headers %}
 <title>Signup</title>
+<script src="{% static 'signup.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -20,18 +22,24 @@
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input type="text" class="form-control" id="username" name="username">
+                    <small id="usernametext" class="form-text error"></small>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" class="form-control" id="email" name="email">
+                    <small id="emailtext" class="form-text error"></small>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" class="form-control" id="password" name="password">
+                    <small id="usernametext" class="form-text error"></small>
                 </div>
                 <button type="submit" class="btn btn-dark">Submit</button>
             </form>
         </div>
     </div>
 </div>
+<script>
+    setErrorText({{error}});
+</script>
 {% endblock %}

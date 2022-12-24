@@ -10,3 +10,7 @@ body {
 .btn-dark {
     background: #333333;
 }
+
+.error {
+    color: #D30000;
+}
