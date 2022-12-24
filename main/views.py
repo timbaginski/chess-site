@@ -50,5 +50,11 @@ def play(request):
 
     return signin(request)
 
+def queue(request):
+    if(request.user.is_authenticated):
+        return render(request, 'game.html')
+
+    return signin(request)
+
     
 

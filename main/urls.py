@@ -6,5 +6,6 @@ urlpatterns = [
     path('login', views.signin),
     path('logout', views.logoutUser),
     path('', views.index),
-    path('play', views.play)
+    path('play', views.play),
+    path('queue', views.queue)
 ]
