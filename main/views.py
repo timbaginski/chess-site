@@ -43,5 +43,12 @@ def logoutUser(request):
 
 def index(request):
     return render(request, 'index.html')
+
+def play(request):
+    if(request.user.is_authenticated):
+        return render(request, 'play.html')
+
+    return signin(request)
+
     
 
