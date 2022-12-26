@@ -1,5 +1,5 @@
 function socketConnect() {
-    let url = "ws://localhost:8000/ws/playgame/1/"; 
+    let url = "ws://localhost:8000/ws/playgame/"; 
 
     const chessSocket = new WebSocket(url);
 
