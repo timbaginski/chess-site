@@ -23,12 +23,12 @@ class Game(models.Model):
             return False
         if self.getWhiteCount() < 2:
             self.whitePlayers.add(user)
-            self.save()
         elif self.getBlackCount() < 2:
             self.blackPlayers.add(user)
 
         if self.getWhiteCount() == 2 and self.getBlackCount() == 2:
             self.started = True
+        self.save()
         return True
 
     def inProgress(self):
