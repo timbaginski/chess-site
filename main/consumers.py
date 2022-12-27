@@ -23,13 +23,17 @@ class ChessConsumer(WebsocketConsumer):
         self.accept()
 
         self.send(text_data=json.dumps({
+            "type": "join_notification",
             "room": str(self.room)
         }))
         
         async_to_sync(self.channel_layer.group_add)(
             self.room, self.channel_name
         )
-   
+
+        self.sendUpdatedRoom()
+
+        
     def disconnect(self, close_code):
         # Leave room group
         async_to_sync(self.channel_layer.group_discard)(
@@ -48,3 +52,12 @@ class ChessConsumer(WebsocketConsumer):
         new_room = Game.objects.create()
         new_room.join(self.user)
         return new_room
+
+    def sendUpdatedRoom(self):
+        rooms = Game.objects.filter(id=self.room)
+        room = list(rooms)[0]
+        if room.inProgress():
+            async_to_sync(self.channel_layer.group_send)(
+                self.room, {"type": "state_notification", "board": ""}
+            )
+   

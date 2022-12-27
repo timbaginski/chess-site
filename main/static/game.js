@@ -5,8 +5,14 @@ function socketConnect() {
 
     chessSocket.onmessage = function(e) {
         let data = JSON.parse(e.data);
-        console.log('Data: ', data);
+        if(data["type"] == "state_notification") {
+            chessBoard(); 
+        }
     }
+}
+
+function chessBoard() {
+    var board1 = Chessboard('board1', 'start');
 }
 
 socketConnect();
