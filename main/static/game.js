@@ -17,8 +17,12 @@ function socketConnect() {
 
 function chessBoard() {
     const content = document.getElementById("content");
-    content.innerHTML = '<div> id="board1" style="width: 400px"</div>';
+    content.innerHTML = '<div id="board1" style="width: 400px"></div>';
     var board1 = Chessboard('board1', 'start');
 }
 
-socketConnect();
+window.onload = function() {
+    socketConnect();
+    chessBoard();
+}
+

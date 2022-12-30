@@ -65,4 +65,7 @@ class ChessConsumer(WebsocketConsumer):
             async_to_sync(self.channel_layer.group_send)(
                 self.room, {"type": "state_notification", "board": ""}
             )
+
+    def state_notification(self, event):
+        self.send(text_data=json.dumps(event))
    
