@@ -15,11 +15,11 @@ def signup(request):
     email = request.POST.get('email', None)
 
     status = userController.createUser(username, password, email)
-
+    print(status)
     if not status:
         return render(request, 'signup.html', context={"error": 1})
     
-    return render(request, 'signin.html', context={"error": 0})
+    return signin(request)
 
 
 # def return login page

@@ -12,6 +12,7 @@ def createUser(username, password, email):
         return False
 
     User.objects.create_user(username=username, password=password, email=email)
+    return True
 
 def usernameExists(username):
     return User.objects.filter(username=username).exists()

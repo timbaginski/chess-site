@@ -33,3 +33,10 @@ class Game(models.Model):
 
     def inProgress(self):
         return self.started
+
+    def removePlayer(self, user):
+        self.whitePlayers.remove(user)
+        self.blackPlayers.remove(user)
+
+        
+

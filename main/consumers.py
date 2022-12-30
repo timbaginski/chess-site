@@ -40,6 +40,11 @@ class ChessConsumer(WebsocketConsumer):
             self.room, self.channel_name
         )
 
+        if self.room != None:
+            rooms = Game.objects.filter(id=self.room)
+            rooms[0].removePlayer(self.user)
+
+
     def recieve(self, text_data):
         text_data_json = json.loads(text_data)
         message = text_data_json["message"]
