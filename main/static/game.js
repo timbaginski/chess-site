@@ -19,7 +19,12 @@ function chessBoard() {
     const content = document.getElementById("content");
     content.style = "position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);";
     content.innerHTML = '<div id="board1" style="width: 400px;"></div>';
-    var board1 = Chessboard('board1', 'start');
+    var config = {
+        draggable: true,
+        dropOffBoard: 'snapback',
+        position: 'start'
+    };
+    var board1 = Chessboard('board1', config);
 }
 
 window.onload = function() {
