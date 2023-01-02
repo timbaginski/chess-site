@@ -49,9 +49,7 @@ class ChessConsumer(WebsocketConsumer):
         text_data_json = json.loads(text_data)
         message = text_data_json["message"]
 
-        async_to_sync(self.channel_layer.group_discard)(
-            self.room_group_name, self.channel_name
-        )
+        self.sendUpdatedRoom()
 
     def createRoom(self):
         new_room = Game.objects.create()
@@ -63,7 +61,7 @@ class ChessConsumer(WebsocketConsumer):
         room = list(rooms)[0]
         if room.inProgress():
             async_to_sync(self.channel_layer.group_send)(
-                self.room, {"type": "state_notification", "fen": ""}
+                self.room, {"type": "state_notification", "fen": room.fen}
             )
 
     def state_notification(self, event):
