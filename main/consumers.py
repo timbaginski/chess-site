@@ -47,8 +47,8 @@ class ChessConsumer(WebsocketConsumer):
 
     def recieve(self, text_data):
         text_data_json = json.loads(text_data)
-        message = text_data_json["message"]
-
+        move = text_data_json["fen"]
+        
         self.sendUpdatedRoom()
 
     def createRoom(self):

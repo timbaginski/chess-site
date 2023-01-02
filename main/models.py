@@ -11,9 +11,9 @@ class Game(models.Model):
     started = models.BooleanField(default=False)
     ended = models.BooleanField(default=False)
     created = models.DateTimeField(default=datetime.now())
-    fen = models.CharField(max_length=2000, default="")
-    currMove1 = models.CharField(max_length=4, default="")
-    currMove2 = models.CharField(max_length=4, default="")
+    fen = models.CharField(max_length=100, default="")
+    currMove1 = models.CharField(max_length=100, default="")
+    currMove2 = models.CharField(max_length=100, default="")
     whiteTurn = models.BooleanField(default=True)
 
     def getWhiteCount(self):
@@ -41,6 +41,25 @@ class Game(models.Model):
     def removePlayer(self, user):
         self.whitePlayers.remove(user)
         self.blackPlayers.remove(user)
+
+    def isMyTurn(self, user):
+        for player in self.whitePlayers.all():
+            if player.id == user.id:
+                return self.whiteTurn
+
+        for player in self.blackPlayers.all():
+            if player.id == user.id:
+                return not self.whiteTurn 
+        
+        return False
+
+    def makeMove(self, user, move):
+        # check for move validity later 
+
+        if not self.isMyTurn(user):
+            return 
+
+        
 
         
 
