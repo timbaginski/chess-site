@@ -63,7 +63,7 @@ class ChessConsumer(WebsocketConsumer):
         room = list(rooms)[0]
         if room.inProgress():
             async_to_sync(self.channel_layer.group_send)(
-                self.room, {"type": "state_notification", "board": ""}
+                self.room, {"type": "state_notification", "fen": ""}
             )
 
     def state_notification(self, event):

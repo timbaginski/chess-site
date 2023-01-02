@@ -11,6 +11,7 @@ class Game(models.Model):
     started = models.BooleanField(default=False)
     ended = models.BooleanField(default=False)
     created = models.DateTimeField(default=datetime.now())
+    fen = models.CharField(max_length=2000, default="")
 
     def getWhiteCount(self):
         return self.whitePlayers.count()

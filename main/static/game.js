@@ -1,3 +1,4 @@
+let chessSocket = null;
 var board1 = null;
 var game = new Chess();
 console.log(game);
@@ -72,7 +73,7 @@ function updateStatus () {
 function socketConnect() {
     let url = "ws://localhost:8000/ws/playgame/"; 
 
-    const chessSocket = new WebSocket(url);
+    chessSocket = new WebSocket(url);
 
     window.onbeforeunload = function() {
         chessSocket.close();
@@ -81,12 +82,12 @@ function socketConnect() {
     chessSocket.onmessage = function(e) {
         let data = JSON.parse(e.data);
         if(data["type"] == "state_notification") {
-            chessBoard(); 
+            chessBoard(data["fen"]); 
         }
     }
 }
 
-function chessBoard() {
+function chessBoard(fen) {
     const content = document.getElementById("content");
     content.style = "position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);";
     content.innerHTML = '<div id="board1" style="width: 400px;"></div>';
@@ -98,7 +99,13 @@ function chessBoard() {
         onDrop: onDrop,
         onSnapEnd: onSnapEnd
     };
-    board1 = Chessboard('board1', config);
+    if(board1 != null) {
+      board1.position = fen;
+      game.load(fen);
+    }
+    else {
+      board1 = Chessboard('board1', config);
+    }
 }
 
 window.onload = function() {
